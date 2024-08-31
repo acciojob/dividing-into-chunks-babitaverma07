@@ -1,16 +1,42 @@
 <!DOCTYPE html>
-
-<html>
-
+<html lang="en">
 <head>
-	<link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Divide into Chunks</title>
 </head>
-
 <body>
-	<!-- the entire body must be written by student -->
-    <script type="text/javascript" src="./script.js">
-</script>
+    <script>
+        function divide(arr, n) {
+            const result = [];
+            let currentChunk = [];
+            let currentSum = 0;
 
+            for (const num of arr) {
+                // Check if adding the current number exceeds the maximum sum
+                if (currentSum + num > n) {
+                    // If so, push the current chunk to the result and start a new chunk
+                    result.push(currentChunk);
+                    currentChunk = [];
+                    currentSum = 0;
+                }
+
+                // Add the number to the current chunk
+                currentChunk.push(num);
+                currentSum += num;
+            }
+
+            // Push the last chunk if it's not empty
+            if (currentChunk.length > 0) {
+                result.push(currentChunk);
+            }
+
+            return result;
+        }
+
+        // Examples
+        console.log(divide([1, 2, 3, 4, 1, 0, 2, 2], 5)); // Output: [[1, 2], [3], [4, 1, 0], [2, 2]]
+        console.log(divide([4, 3, 2, 1], 4)); // Output: [[4], [3], [2, 1]]
+    </script>
 </body>
-
 </html>
